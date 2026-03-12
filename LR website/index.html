@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LR FW27</title>
+
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --text: #111;
+      --muted: #444;
+      --container-max: 1440px;
+      --container-side: clamp(20px, 3vw, 36px);
+      --header-side: clamp(20px, 3vw, 40px);
+      --hero-space: clamp(16px, 3vw, 36px);
+      --grid-gap: clamp(20px, 2.4vw, 34px);
+      --hero-overlay: rgba(247, 247, 245, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    img, video {
+      display: block;
+      max-width: 100%;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 20px var(--header-side);
+      background: rgba(247, 247, 245, 0);
+    }
+
+    .brand a {
+      display: inline-block;
+      line-height: 0;
+    }
+
+    .brand img {
+      height: 26px;
+      width: auto;
+    }
+
+    .menu {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      padding-top: 6px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .menu a:hover {
+      opacity: 0.55;
+    }
+
+    .hero {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+      padding: var(--hero-space);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-overlay);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero video {
+      position: relative;
+      z-index: 0;
+      width: auto;
+      height: auto;
+      max-width: min(100%, 1600px);
+      max-height: calc(100dvh - (var(--hero-space) * 2));
+      object-fit: contain;
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 34px var(--container-side) 50px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--grid-gap);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 3 / 4.3;
+      object-fit: cover;
+    }
+
+    .info {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info p {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 300;
+      line-height: 1.35;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .info span {
+      font-size: 18px;
+      line-height: 1;
+      color: var(--muted);
+      font-weight: 300;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      .site-header {
+        padding: 18px 20px;
+      }
+
+      .brand img {
+        height: 24px;
+      }
+
+      .menu {
+        gap: 14px;
+        padding-top: 4px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-header {
+        padding: 16px 16px;
+      }
+
+      .brand img {
+        height: 22px;
+      }
+
+      .menu {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .menu a {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+
+      .hero {
+        padding: 12px;
+      }
+
+      .hero video {
+        max-height: calc(100dvh - 24px);
+      }
+
+      .container {
+        padding: 24px 16px 40px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <a href="https://www.linereviewtessellation.com/">
+        <img src="pic/logo.png" alt="Brand Logo">
+      </a>
+    </div>
+
+    <nav class="menu">
+      <a href="https://www.linereviewtessellation.com/">New</a>
+      <a href="#">Man</a>
+      <a href="#">Collection</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="pic/hero.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <main class="container">
+    <section class="gallery">
+      <div class="card">
+        <img src="pic/photo1.jpg" alt="Striped relaxed fit shirt" loading="lazy">
+        <div class="info">
+          <p>Striped relaxed fit shirt</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo2.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo3.jpg" alt="Striped flowing shirt" loading="lazy">
+        <div class="info">
+          <p>Striped flowing shirt</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo4.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo5.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo6.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo7.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo8.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="pic/photo9.jpg" alt="Origins check shirt with wool" loading="lazy">
+        <div class="info">
+          <p>Origins check shirt with wool</p>
+          <span>+</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
