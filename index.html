@@ -16,7 +16,7 @@
       --hero-space: clamp(16px, 3vw, 36px);
       --grid-gap: clamp(20px, 2.4vw, 34px);
       --hero-overlay: rgba(247, 247, 245, 0.08);
-      --mobile-hero-offset: 84px;
+      --mobile-hero-offset: 0px;
     }
 
     * {
@@ -226,7 +226,7 @@
 </head>
 <body>
 
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="brand">
       <a href="https://www.linereviewtessellation.com/">
         <img src="pic/logo.png" alt="Brand Logo">
@@ -334,9 +334,21 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const header = document.getElementById("siteHeader");
       const video = document.getElementById("heroVideo");
-      if (!video) return;
+      const root = document.documentElement;
 
+      const updateHeaderOffset = () => {
+        if (!header) return;
+        const headerHeight = header.offsetHeight;
+        root.style.setProperty("--mobile-hero-offset", `${headerHeight}px`);
+      };
+
+      updateHeaderOffset();
+      window.addEventListener("resize", updateHeaderOffset);
+      window.addEventListener("load", updateHeaderOffset);
+
+      if (!video) return;
       if (window.innerWidth <= 640) return;
 
       video.muted = true;
