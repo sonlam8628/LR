@@ -201,7 +201,10 @@
       }
 
       .hero {
-        padding: var(--mobile-hero-offset) 50px;
+        margin-top: var(--mobile-hero-offset);
+        padding: 0;
+        min-height: calc(100vh - var(--mobile-hero-offset));
+        min-height: calc(100dvh - var(--mobile-hero-offset));
         background:
           linear-gradient(rgba(247, 247, 245, 0.08), rgba(247, 247, 245, 0.08)),
           url("pic/hero-poster.jpg") center center / cover no-repeat;
